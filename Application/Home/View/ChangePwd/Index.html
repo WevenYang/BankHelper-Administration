@@ -1,0 +1,58 @@
+<extend name="Public/base"  />
+
+<block name="adminContent">
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">修改密码</strong></div>
+            </div>
+
+            <hr />
+
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+
+
+                </div>
+
+                <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+                    <form class="am-form am-form-horizontal" id="personData-form">
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">账号</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="user_account" name="user_account" disabled>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">原来密码</label>
+                            <div class="am-u-sm-9">
+                                <input type="email" id="user_former_pwd" name="user_former_pwd" placeholder="输入原来密码">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">新密码</label>
+                            <div class="am-u-sm-9">
+                                <input type="number" id="user_new_pwd" name="user_new_pwd" placeholder="输入新密码">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">重复一遍新密码</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="new_pwd" name="new_pwd" placeholder="重复一遍新密码">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary" id="save_modify">保存修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
