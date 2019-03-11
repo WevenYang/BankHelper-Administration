@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <base href="/dashboard/www/Thinkphp3.2/test/Public/">
+    <base href="/dashboard/www/BankHelperAdministration/Public/">
     <link rel="icon" type="image/png" href="i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
