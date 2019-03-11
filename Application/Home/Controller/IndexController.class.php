@@ -7,496 +7,735 @@ class IndexController extends Controller {
         $this -> display("index");
     }
 
-//    /**
-//     * 登陆接口
-//     */
-//    public function login()
-//    {
-//        $condition['account'] = I('get.account');
-//        $condition['password'] = I('get.password');
-//        $list = M("module_login")->where($condition)->find();
-//        if ($list) {
-////            echo json_encode($list);
-//            $token =md5($condition['account'])."-".md5($condition['password'])."-".time();
-//            echo "{
-//                    \"code\": 200,
-//                    \"token\": \"".$token."\",
-//                    \"result\": \"登录成功\",
-//                    \"data\": ".json_encode($list)."
-//                }";
-//        } else {
-//            echo
-//            "{
-//    \"code\": 202,
-//    \"token\": \"\",
-//    \"result\": \"登录失败\",
-//    \"data\": \"{}\"
-//}";
-//        }
-//    }
+    /**
+     * 登陆接口
+     */
+    public function login()
+    {
+        header('content-type:application/json;charset=utf8');
+        $acc = I("post.account");
+        $pwd = I("post.password");
+        $condition["account"] = $acc;
+        $condition["password"] = $pwd;
 
-    public function uploadAllOrder(){
-        $type = I('get.type');
-        switch ($type){
-            case 0:
-                //采购管理
-                $table = M("purchase");
-                break;
-            case 1:
-                //维修管理
-                $table = M("repair");
-                break;
-            case 2:
-                //故障管理
-                $table = M("hitch");
-                break;
-            case 3:
-                //借还管理
-                $table = M("borrow");
-                break;
-            case 4:
-                //报废管理
-                $table = M("dump");
-                break;
-        }
-        $con['title'] = I('get.title');
-        $con['content'] = I('get.content');
-        $con['date'] = I('get.date');
-        $con['status'] = I('get.status');
-        $con['apply_man'] = I('get.man');
-        $table -> add($con);
-        if ($table){
-            $data = array(
-                "code" => 200,
-                "data" => "提交成功，等待回复",
-                "success" => true
-            );
-        }else{
-            $data = array(
-                "code" => 403,
-                "data" => "提交失败，请重试",
-                "success" => false
-            );
-        }
-        echo json_encode($data);
-    }
-
-    public function login(){
-        $condition["account"] = I('get.account');
-        $condition["password"] = I('get.password');
-//        $acc = input('post.acc');
-//        $psd = input('post.psd');
-//        $data = Db::query('select * from module_login where account = '.$acc.' and password = '.$psd);
-//        $data = Db::table('module_login')->where('account', $acc)->find();
-        $data = M("login") -> where($condition) -> find();
-        if ($data){
+        $list = M("person_info")->where($condition)->find();
+        if ($list) {
+            $userId = M("person_info")->where($condition)->getField("id");
+            $paypwd = M("person_info")->where($condition)->getField("paypassword");
+            $name = M("person_info")->where($condition)->getField("account");
+            $icon = M("person_info")->where($condition)->getField("icon");
+            $token =md5($condition['account'])."-".md5($condition['password'])."-".time();
             $arr = array(
-                "code" => 200,
-                "data" => "登录成功",
-                "success" => true
+                "Code" => 200,
+                "Data" => array(
+                    "token"=> $token,
+                    "userId" => $userId,
+                    "paypwd" => $paypwd,
+                    "name" => $name,
+                    "icon" => $icon,
+                ),
+                "Success" => true,
+                "Message" => "登陆成功"
             );
-        }else{
+        } else {
             $arr = array(
-                "code" => 403,
-                "data" => "登录失败",
-                "success" => false
+                "Code" => 200,
+                "Data" => array(
+                    "token"=> "",
+                    "userId" => "",
+                    "paypwd" => ""
+                ),
+                "Success" => false,
+                "Message" => "登陆失败"
             );
         }
         echo json_encode($arr);
     }
 
-    public function register(){
-        $acc = I('get.acc');
-        $psd  = I('get.psd');
-        $nick = I('get.nick');
-        $sex = I("get.sex");
-        $role = I("get.role");
-        //查询是否有该用户注册过
-        $con['account'] = $acc;
-        $con['password'] = $psd;
-        $data = M('login') -> where($con) -> find();
-        $con['nick'] = $nick;
-        $con['sex'] = $sex;
-        $con['role'] = $role;
-        if ($data){
+    /**
+     *注册信息
+     */
+    public function register()
+    {
+//        $data = M("person_info");
+//        $account = I("post.account");
+//        $condition["account"] = $account;
+//        $condition["password"] = I("post.password");
+//        $condition["nickname"] = I("post.nickname");
+//        $condition["idcard"] = I("post.idcard");
+//        if($data -> where("account = '%s'", $account) -> find()){
+//            $arr = array(
+//                "Code" => 200,
+//                "Data" => "",
+//                "Success" => true,
+//                "Message" => "该账户名已存在"
+//            );
+//        }
+//        else{
+//            $data -> add($condition);
+        $arr = array(
+            "Code" => 200,
+            "Data" => "asfdas",
+            "Success" => true,
+            "Message" => "注册成功"
+        );
+//        }
+        return json_encode($arr);
+    }
+
+    //获取个人资料
+    public function getPersonInfo(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("person_info");
+        $now = date("y-m-d H:i:s");
+        $userId = I("post.userid");
+        $token = I("post.token");
+        $client = strstr($token, "15");
+//        if (strstr(strtotime($now), "15") - $client > 7200){
+//            $arr = array(
+//                "Code" => 203,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "认证失败，请重新登陆"
+//            );
+//        }else{
+        $result = $data -> where("id='%s'", $userId) -> select();
+        if ($result){
             $arr = array(
-                "code" => 404,
-                "data" => "",
-                "message" => "已存在该用户",
-                "success" => false
+                "Code" => 200,
+                "Data" => $result,
+                "Success" => true,
+                "Message" => "获取成功"
             );
         }else{
-            $list = M('login') -> add($con);
-//            $list = Db::execute('insert into module_register (account, password, nick, sex, introduce)
-//                                  values (?, ?, ?, ?, ?)', [$acc, $psd, $nick, $sex, $introduce]);
-            if ($list){
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "获取失败"
+            );
+        }
+//        }
+        echo json_encode($arr);
+    }
+
+    //修改个人资料
+    public function editPersonInfo(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("person_info");
+        $now = date("y-m-d H:i:s");
+        $userId = I("post.id");
+        $token = I("post.token");
+        $condition["nickname"] = I("post.nickname");
+        $condition["phonenum"] = I("post.phonenum");
+        $condition["sex"] = I("post.sex");
+        $condition["idcard"] = I("post.idcard");
+//        $client = strstr($token, "15");
+//        if (strstr(strtotime($now), "15") - $client > 7200){
+//            $arr = array(
+//                "Code" => 203,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "认证失败，请重新登陆"
+//            );
+//        }else{
+        $result = $data -> where("id='%s'", $userId) -> save($condition);
+        if ($result){
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => true,
+                "Message" => "上传成功"
+            );
+        }else{
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "上传失败"
+            );
+        }
+//        }
+        echo json_encode($arr);
+    }
+
+    //查询账户余额
+    public function queryBalance(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("person_account");
+        $now = date("y-m-d H:i:s");
+        $token = I("post.token");
+        $userid = I("post.id");
+        $client = strstr($token, "15");
+//        if (strstr(strtotime($now), "15") - $client > 7200){
+//            $arr = array(
+//                "Code" => 203,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "认证失败，请重新登陆"
+//            );
+//        }else{
+        $result = $data -> where("u_id = '%s'", $userid) -> getField("account");
+        if ($result){
+            $arr = array(
+                "Code" => 200,
+                "Data" => array(
+                    "balance" => $result,
+                ),
+                "Success" => true,
+                "Message" => "查询成功"
+            );
+        }else{
+            $arr = array(
+                "Code" => 200,
+                "Data" => array(
+                    "balance" => 0,
+                ),
+                "Success" => false,
+                "Message" => "查询失败"
+            );
+        }
+//        }
+        echo json_encode($arr);
+    }
+
+    //修改密码
+    public function resetPwd(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("person_info");
+        $now = date("y-m-d H:i:s");
+        $userId = I("post.userId");
+        $token = I("post.token");
+        $former = I("post.formerPwd");
+        $client = strstr($token, "15");
+        $newPwd = I("post.newPwd");
+        if (strstr(strtotime($now), "15") - $client > 7200){
+            $arr = array(
+                "Code" => 203,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "认证失败，请重新登陆",
+            );
+        }else{
+            $formerpwd = explode("-", $token);
+            if (md5($former) == $formerpwd[1]){
+                $data = M("person_info") -> where('id='.$userId)-> setField("password", $newPwd);
+                if($data){
+                    $arr = array(
+                        "Code" => 200,
+                        "Data" => "",
+                        "Success" => true,
+                        "Message" => "登陆密码修改成功"
+                    );
+                }else {
+                    $arr = array(
+                        "Code" => 200,
+                        "Data" => "",
+                        "Success" => false,
+                        "Message" => "登陆密码修改失败"
+                    );
+                }
+
+            }else {
                 $arr = array(
-                    "code" => 403,
-                    "data" => $list,
-                    "message" => "注册成功",
-                    "success" => false
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => false,
+                    "Message" => "原密码输入错误".$formerpwd
+                );
+            }
+        }
+        echo json_encode($arr);
+    }
+
+    //支付密码修改
+    public function resetPayPwd(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("person_info");
+        $now = date("y-m-d H:i:s");
+        $token = I("post.token");
+        $userId = I("post.userId");
+        $former = I("post.formerPwd");
+        $client = strstr($token, "15");
+        $newPwd = I("post.newPwd");
+        if (strstr(strtotime($now), "15") - $client > 7200){
+            $arr = array(
+                "Code" => 203,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "认证失败，请重新登陆"
+            );
+        }else{
+            $formerpwd = explode("-", $token);
+            if (md5($former) == $formerpwd[1]){
+                $result = $data -> where('id='.$userId)-> setField("paypassword", $newPwd);
+                if($result){
+                    $arr = array(
+                        "Code" => 200,
+                        "Data" => "",
+                        "Success" => true,
+                        "Message" => "支付密码修改成功"
+                    );
+                }else {
+                    $arr = array(
+                        "Code" => 200,
+                        "Data" => "",
+                        "Success" => false,
+                        "Message" => "支付密码修改失败"
+                    );
+                }
+
+            }else {
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => false,
+                    "Message" => "原密码输入错误".$formerpwd
+                );
+            }
+        }
+        echo json_encode($arr);
+    }
+
+    //意见反馈
+    public function feedback(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("feedback");
+        $now = date("y-m-d H:i:s");
+        $token = I("post.token");
+        $condition["content"] = I("post.content");
+        $condition["user_id"] = I("post.user");
+        $condition["date"] = $now;
+        $client = strstr($token, "15");
+        if (strstr(strtotime($now), "15") - $client > 7200){
+            $arr = array(
+                "Code" => 203,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "认证失败，请重新登陆"
+            );
+        }else{
+            $result = $data -> add($condition);
+            if ($result){
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => true,
+                    "Message" => "上传成功"
                 );
             }else{
                 $arr = array(
-                    "code" => 403,
-                    "data" => $data,
-                    "message" => "注册失败",
-                    "success" => false
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => false,
+                    "Message" => "上传失败"
                 );
             }
-
         }
         echo json_encode($arr);
     }
 
-    public function getHitchOrder(){
-        $table = M('hitch');
-        $data = $table -> select();
-        if ($data){
-            $data = array(
-                "code" => 200,
-                "data" => $data,
-                "message" => "获取成功",
-                "success" => true
+    //风险举报
+    public function riskReport(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("risk");
+        $now = date("y-m-d H:i:s");
+        $token = I("post.token");
+        $condition["content"] = I("post.content");
+        $condition["user_id"] = I("post.user");
+        $condition["date"] = $now;
+        $client = strstr($token, "15");
+        if (strstr(strtotime($now), "15") - $client > 7200){
+            $arr = array(
+                "Code" => 203,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "认证失败，请重新登陆"
             );
         }else{
-            $data = array(
-                "code" => 403,
-                "data" => "",
-                "message" => "获取失败",
-                "success" => false
-            );
+            $result = $data -> add($condition);
+            if ($result){
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => true,
+                    "Message" => "上传成功"
+                );
+            }else{
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => false,
+                    "Message" => "上传失败"
+                );
+            }
         }
-        echo json_encode($data);
+        echo json_encode($arr);
     }
 
-    public function getRepairOrder(){
-        $table = M('repair');
-        $data = $table -> select();
-        if ($data){
-            $data = array(
-                "code" => 200,
-                "data" => $data,
-                "message" => "获取成功",
-                "success" => true
+    //获取转账用户账号id
+    public function getPeopleAccount(){
+        header('content-type:application/json;charset=utf8');
+        $account = I("post.account");
+        $list = M("person_info")->where("account='%s'", $account) -> select();
+        if ($list) {
+            $userId = M("person_info")->where("account='%s'", $account) ->getField("id");
+            $nickname = M("person_info")->where("account='%s'", $account) ->getField("nickname");
+            $arr = array(
+                "Code" => 200,
+                "Data" => array(
+                    "userId"=> $userId,
+                    "nickName" => $nickname
+                ),
+                "Success" => true,
+                "Message" => "查询成功"
+            );
+        } else {
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "输入账号不存在，请重新输入"
+            );
+        }
+        echo json_encode($arr);
+    }
+
+    //定期转活期、活期转定期
+    public function transfer(){
+        header("Content-Type:text/html; charset=utf-8");
+        $now = date("y-m-d H:i:s");
+        $userId = I("post.userid");
+        $type = I("post.type");
+        $token = I("post.token");
+        $transfer_money = I("post.num");
+        $before_fix_deposit = I("post.fix_deposit");
+        $client = strstr($token, "15");
+//        if (strstr(strtotime($now), "15") - $client > 7200){
+//            $arr = array(
+//                "Code" => 203,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "认证失败，请重新登陆"
+//            );
+//        }else{
+        //0代表转入，1代表转出
+        if ($type == 0){
+            $before_current_deposit = M("person_account") -> where("u_id='%s'", $userId) -> getField("current_deposit");
+            $after_current_deposit = $before_current_deposit - $transfer_money;
+            $after_fix_deposit = $before_fix_deposit + $transfer_money;
+            //不可重复使用$data,原因估计是该赋值只指定数据库一次
+            $result1 = M("person_account") -> where("u_id='%s'", $userId) -> setField('current_deposit', $after_current_deposit);
+            $result2 = M("person_account") -> where("u_id='%s'", $userId) -> setField('fixed_deposit', $after_fix_deposit);
+            if ($result1 && $result2){
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => true,
+                    "Message" => "操作成功"
+                );
+            }else{
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => false,
+                    "Message" => "操作失败"
+                );
+            }
+        }else if($type == 1){
+
+            $before_current_deposit = M("person_account") -> where("u_id='%s'", $userId) -> getField("current_deposit");
+            $after_current_deposit = $before_current_deposit + $transfer_money;
+            $after_fix_deposit = $before_fix_deposit - $transfer_money;
+            $result1 = M("person_account") -> where("u_id='%s'", $userId)  -> setField("current_deposit", $after_current_deposit);
+            $result2 = M("person_account") -> where("u_id='%s'", $userId)  -> setField("fixed_deposit", $after_fix_deposit);
+            if ($result1 && $result2){
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => true,
+                    "Message" => "操作成功"
+                );
+            }else{
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => false,
+                    "Message" => "操作失败"
+                );
+            }
+        }else {
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "操作失败，请检查接口"
+            );
+        }
+
+//        }
+        echo json_encode($arr);
+    }
+
+    //获取用户的账户信息
+    public function getMyAccount(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("person_account");
+        $now = date("y-m-d H:i:s");
+        $token = I("post.token");
+        $userid = I("post.id");
+        $client = strstr($token, "15");
+//        if (strstr(strtotime($now), "15") - $client > 7200){
+//            $arr = array(
+//                "Code" => 203,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "认证失败，请重新登陆"
+//            );
+//        }else{
+        $result1 = $data -> where("u_id = '%s'", $userid) -> getField("account");
+        $result2 = $data -> where("u_id = '%s'", $userid) -> getField("fixed_deposit");
+        $result3 = $data -> where("u_id = '%s'", $userid) -> getField("current_deposit");
+        if ($result1 && $result2 && $result3){
+            $arr = array(
+                "Code" => 200,
+                "Data" => array(
+                    "account" => $result1,
+                    "fixed_deposit" => $result2,
+                    "current_deposit" => $result3,
+                ),
+                "Success" => true,
+                "Message" => "查询成功"
             );
         }else{
-            $data = array(
-                "code" => 403,
-                "data" => "",
-                "message" => "获取失败",
-                "success" => false
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "查询失败"
             );
         }
-        echo json_encode($data);
+//        }
+        echo json_encode($arr);
     }
 
-    public function getDumpOrder(){
-        $table = M('dump');
-        $data = $table -> select();
-        if ($data){
-            $data = array(
-                "code" => 200,
-                "data" => $data,
-                "message" => "获取成功",
-                "success" => true
+    //获取银行信息
+    public function getBankMessage(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("bank_message");
+        $now = date("y-m-d H:i:s");
+        $token = I("post.token");
+        $userid = I("post.id");
+        $client = strstr($token, "15");
+//        if (strstr(strtotime($now), "15") - $client > 7200){
+//            $arr = array(
+//                "Code" => 203,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "认证失败，请重新登陆"
+//            );
+//        }else{
+        $result = $data -> order("id desc") -> select();
+        if ($result){
+            $arr = array(
+                "Code" => 200,
+                "Data" => $result,
+                "Success" => true,
+                "Message" => "获取成功"
+            );
+        }else {
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "获取失败"
+            );
+        }
+//}
+        echo json_encode($arr);
+    }
+
+    //获取定期余额
+    public function getFixDeposit(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("person_account");
+        $now = date("y-m-d H:i:s");
+        $token = I("post.token");
+        $userid = I("post.id");
+        $client = strstr($token, "15");
+//        if (strstr(strtotime($now), "15") - $client > 7200){
+//            $arr = array(
+//                "Code" => 203,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "认证失败，请重新登陆"
+//            );
+//        }else{
+        $result2 = $data -> where("u_id = '%s'", $userid) -> getField("fixed_deposit");
+        if ($result2){
+            $arr = array(
+                "Code" => 200,
+                "Data" => $result2,
+                "Success" => true,
+                "Message" => "查询成功"
             );
         }else{
-            $data = array(
-                "code" => 403,
-                "data" => "",
-                "message" => "获取失败",
-                "success" => false
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "查询失败"
             );
         }
-        echo json_encode($data);
+//        }
+        echo json_encode($arr);
     }
 
-    public function getPurchaseOrder(){
-        $table = M('purchase');
-        $data = $table -> select();
-        if ($data){
-            $data = array(
-                "code" => 200,
-                "data" => $data,
-                "success" => true
+    //获取活期余额
+    public function  getCurrentDeposit(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("person_account");
+        $now = date("y-m-d H:i:s");
+        $token = I("post.token");
+        $userid = I("post.id");
+        $client = strstr($token, "15");
+//        if (strstr(strtotime($now), "15") - $client > 7200){
+//            $arr = array(
+//                "Code" => 203,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "认证失败，请重新登陆"
+//            );
+//        }else{
+        $result3 = $data -> where("u_id = '%s'", $userid) -> getField("current_deposit");
+        if ($result3){
+            $arr = array(
+                "Code" => 200,
+                "Data" => $result3,
+                "Success" => true,
+                "Message" => "查询成功"
             );
         }else{
-            $data = array(
-                "code" => 403,
-                "data" => "获取失败",
-                "success" => false
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "查询失败"
             );
         }
-        echo json_encode($data);
+//        }
+        echo json_encode($arr);
     }
 
-    public function getBorrowOrder(){
-        $table = M('borrow');
-        $data = $table -> select();
-        if ($data){
-            $data = array(
-                "code" => 200,
-                "data" => $data,
-                "message" => "获取成功",
-                "success" => true
+    //保存信息接口
+    public function saveMessage($type, $num){
+        $data = M("bank_message");
+        //0为充值，1为转账，2为转入定期，3为转出定期
+        $condition["type"] = $type;
+        $condition["num"] = $num;
+        $result = $data -> add($condition);
+        if ($result){
+            return true;
+        }else {
+            return false;
+        }
+
+
+    }
+
+    //充值接口
+    public function recharge(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("bank_message");
+        $now = date("y-m-d H:i:s");
+        $token = I("post.token");
+        $num = I("post.num");
+        $userid = I("post.id");
+        $client = strstr($token, "15");
+//        if (strstr(strtotime($now), "15") - $client > 7200){
+//            $arr = array(
+//                "Code" => 203,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "认证失败，请重新登陆"
+//            );
+//        }else{
+        $former_deposit = M("person_account") -> where("u_id='%s'", $userid) -> getField("account");
+        $fixed_deposit = M("person_account") -> where("u_id='%s'", $userid) -> getField("fixed_deposit");
+        $current_deposit = $former_deposit + $num;
+        $current_current = $current_deposit - $fixed_deposit;
+        $result = M("person_account") -> where("u_id='%s'", $userid) -> setField("account", $current_deposit);
+        $result1 = M("person_account") -> where("u_id='%s'", $userid) -> setField("current_deposit", $current_current);
+        if (($this -> saveMessage(0, $num)) && $result && $result1){
+
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => true,
+                "Message" => "操作成功"
             );
-        }else{
-            $data = array(
-                "code" => 403,
-                "data" => "",
-                "message" => "获取失败",
-                "success" => false
+        }else {
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "操作失败"
             );
         }
-        echo json_encode($data);
+//}
+        echo json_encode($arr);
     }
 
-    public function getAllOrder(){
-        $bo = M('borrow') -> select();
-        $pu = M('purchase') -> select();
-        $du = M('dump') -> select();
-        $hi = M('hitch') -> select();
-        $re = M('repair') -> select();
-        $data = array_merge($pu, $re, $hi, $bo, $du);
-        if ($data){
-            $data = array(
-                "code" => 200,
-                "data" => $data,
-                "message" => "获取成功",
-                "success" => true
+    public function transferToAccount(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data = M("bank_message");
+        $now = date("y-m-d H:i:s");
+        $token = I("post.token");
+        $num = I("post.num");
+        $userid = I("post.id");
+        $toAccountId = I("post.toAccountId");
+        $client = strstr($token, "15");
+//        if (strstr(strtotime($now), "15") - $client > 7200){
+//            $arr = array(
+//                "Code" => 203,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "认证失败，请重新登陆"
+//            );
+//        }else{
+        $former_deposit = M("person_account") -> where("u_id='%s'", $userid) -> getField("account");
+        $former_deposit1 = M("person_account") -> where("u_id='%s'", $toAccountId) -> getField("account");
+        $current_deposit = $former_deposit + $num;
+        $current_deposit1 = $former_deposit - $num;
+        $result = M("person_account") -> where("u_id='%s'", $userid) -> setField("account", $current_deposit);
+        $result1 = M("person_account") -> where("u_id='%s'", $toAccountId) -> setField("account", $current_deposit1);
+        if (($this -> saveMessage(1, $num)) && $result && $result1){
+
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => true,
+                "Message" => "操作成功"
             );
-        }else{
-            $data = array(
-                "code" => 403,
-                "data" => "",
-                "message" => "获取失败",
-                "success" => false
+        }else {
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "操作失败"
             );
         }
-        echo json_encode($data);
+//}
+        echo json_encode($arr);
     }
 
-    public function myMachine(){
-        $table = M('mymachine');
-        $data = $table -> select();
-        if ($data){
-            $data = array(
-                "code" => 200,
-                "data" => $data,
-                "message" => "获取成功",
-                "success" => true
-            );
-        }else{
-            $data = array(
-                "code" => 403,
-                "data" => "",
-                "message" => "获取失败",
-                "success" => false
-            );
-        }
-        echo json_encode($data);
-    }
-
-    public function allMachine(){
-        $table = M('machinelist');
-        $data = $table -> select();
-        if ($data){
-            $data = array(
-                "code" => 200,
-                "data" => $data,
-                "message" => "获取成功",
-                "success" => true
-            );
-        }else{
-            $data = array(
-                "code" => 403,
-                "data" => "",
-                "message" => "获取失败",
-                "success" => false
-            );
-        }
-        echo json_encode($data);
-    }
-
-    public function getDataCalc(){
-        $borrowNum = M("borrow") -> count();
-        $dumpNum = M("dump") -> count();
-        $hitchNum = M("hitch") -> count();
-        $purchaseNum = M("purchase") -> count();
-        $repairNum = M("repair") -> count();
-        $borrowFromNum = M("mymachine") -> count();
-        $allNum = $borrowNum+$dumpNum+$hitchNum+$purchaseNum+$repairNum;
-        $data = array(
-            "borrowNum" => $borrowNum,
-            "dumpNum" => $dumpNum,
-            "hitchNum" => $hitchNum,
-            "purchaseNum" => $purchaseNum,
-            "repairNum" => $repairNum,
-            "allNum"=> $allNum,
-            "borrowFromNum" => $borrowFromNum
+    public function test(){
+        $token = I("post.token");
+        $arr = array(
+            "token" => $token,
         );
-        if ($data){
-            $data = array(
-                "code" => 200,
-                "data" => $data,
-                "message" => "获取成功",
-                "success" => true
-            );
-        }else{
-            $data = array(
-                "code" => 403,
-                "data" => "",
-                "message" => "获取失败",
-                "success" => false
-            );
-        }
-        echo json_encode($data);
-    }
-
-    public function disposeTheOrder(){
-        $array["id"] = I("get.id");
-        $types = I("get.type");
-        if ($types == 0){
-            //通过该工单
-            $data = M('purchase') -> where($array) -> setField('status', '0');
-        }else if ($types == -1){
-            //拒绝该工单
-            $data = M('purchase') -> where($array) -> setField('status', '-1');
-        }
-
-        if ($data){
-            $data = array(
-                "code" => 200,
-                "data" => $data,
-                "message" => "加载成功",
-                "success" => true
-            );
-        }else{
-            $data = array(
-                "code" => 403,
-                "data" => "",
-                "message" => "加载失败",
-                "success" => false
-            );
-        }
-        echo json_encode($data);
-    }
-
-    public function t_getFilterOrder(){
-        $type = I('get.type');
-        switch ($type){
-            case 0:
-                //采购管理
-                $table = M("purchase");
-                break;
-            case 1:
-                //维修管理
-                $table = M("repair");
-                break;
-            case 2:
-                //故障管理
-                $table = M("hitch");
-                break;
-            case 3:
-                //借还管理
-                $table = M("borrow");
-                break;
-            case 4:
-                //报废管理
-                $table = M("dump");
-                break;
-        }
-        $data = $table -> select();
-        if ($data){
-            $data = array(
-                "data" => $data,
-                "code" => 200,
-                "message" => "加载成功",
-                "success" => true
-            );
-        }else{
-            $data = array(
-                "data" => "",
-                "code" => 403,
-                "dmessage" => "加载失败",
-                "success" => false
-            );
-        }
-        echo json_encode($data);
-    }
-
-    public function t_verifyOrder(){
-        $id = I('get.t_id');
-        $type = I('get.type');
-        $result = I('get_result');
-        switch ($type){
-            case 0:
-                //采购管理
-                $table = M("purchase");
-                break;
-            case 1:
-                //维修管理
-                $table = M("repair");
-                break;
-            case 2:
-                //故障管理
-                $table = M("hitch");
-                break;
-            case 3:
-                //借还管理
-                $table = M("borrow");
-                break;
-            case 4:
-                //报废管理
-                $table = M("dump");
-                break;
-        }
-        if ($result == 0){
-            $table -> status = 0;
-        }else if ($result == -1){
-            $table -> status = -1;
-        }
-        $data = $table -> where("id = $id") -> save();
-        if ($data){
-            $data = array(
-                "data" => $data,
-                "code" => 200,
-                "message" => "审核成功",
-                "success" => true
-            );
-        }else{
-            $data = array(
-                "data" => "",
-                "code" => 403,
-                "dmessage" => "审核失败",
-                "success" => false
-            );
-        }
-        echo json_encode($data);
-    }
-
-    public function t_reloadMachine(){
-        $con['name'] = I("get.name");
-        $con['t_id'] = I("get.t_id");
-        $con['own'] = I("get.own");
-        $con['cover'] = "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2500398310,3060982317&fm=27&gp=0.jpg";
-        $list = M('machinelist') -> add($con);
-        if ($list){
-            $arr = array(
-                "code" => 200,
-                "data" => $list,
-                "message" => "提交成功",
-                "success" => true
-            );
-        }else{
-            $arr = array(
-                "code" => 403,
-                "data" => $list,
-                "message" => "提交失败",
-                "success" => false
-            );
-        }
         echo json_encode($arr);
     }
+
+
 }

@@ -54,20 +54,21 @@
             <ul class="am-list admin-sidebar-list">
                 <li><a href="../Home/index"><span class="am-icon-home"></span> 首页</a></li>
                 <li class="admin-parent">
-                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 用户申请 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-apply'}"><span class="am-icon-file"></span> 用户申请 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                     <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-apply">
-                        <li><a href="admin-user.html" class="am-cf"><span class="am-icon-check"></span> 定期转入<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-                        <li><a href="admin-help.html"><span class="am-icon-puzzle-piece"></span> 定期转出</a></li>
+                        <li><a href="../Home/ImportIn" class="am-cf"><span class="am-icon-check"></span> 定期转入<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                        <li><a href="../Home/ImportOut"><span class="am-icon-puzzle-piece"></span> 定期转出</a></li>
                     </ul>
                 </li>
                 <li class="admin-parent">
-                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 其他 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-other'}"><span class="am-icon-file"></span> 其他 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                     <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-other">
-                        <li><a href="admin-gallery.html"><span class="am-icon-th"></span> 意见反馈</a></li>
-                        <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 风险举报</a></li>
+                        <li><a href="../Home/Feedback.html"><span class="am-icon-th"></span> 意见反馈</a></li>
+                        <li><a href="../Home/RiskReport"><span class="am-icon-calendar"></span> 风险举报</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><span class="am-icon-sign-out"></span> 退出账号</a></li>
+
             </ul>
         </div>
     </div>
@@ -77,55 +78,14 @@
     
     <div class="admin-content">
         <div class="admin-content-body">
-            <div class="am-cf am-padding am-padding-bottom-0">
-                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong></div>
+            <div class="about_content">
+                <img src="images/default.png"/>
+                <p style="font-size: 20px;">南方头条</p>
+                <p>版本：V1.0</p>
             </div>
+            <div class="about_footer">
+                <p>CopyRight 2018-2019</p> <p>南方头条 提供技术支持</p>
 
-            <hr />
-
-            <div class="am-g">
-                <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
-
-
-                </div>
-
-                <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                    <form class="am-form am-form-horizontal" id="personData-form">
-                        <div class="am-form-group">
-                            <label class="am-u-sm-3 am-form-label">名称</label>
-                            <div class="am-u-sm-9">
-                                <input type="text" id="user_name" name="user_name" disabled>
-                            </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label class="am-u-sm-3 am-form-label">用户邮箱</label>
-                            <div class="am-u-sm-9">
-                                <input type="email" id="user_email" name="user_email" placeholder="输入你的用户邮箱">
-                            </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label class="am-u-sm-3 am-form-label">移动电话</label>
-                            <div class="am-u-sm-9">
-                                <input type="number" id="user_phone" name="user_phone" placeholder="输入你的电话">
-                            </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label class="am-u-sm-3 am-form-label">真实姓名</label>
-                            <div class="am-u-sm-9">
-                                <input type="text" id="user_realName" name="user_realName" placeholder="输入你的真实姓名">
-                            </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <div class="am-u-sm-9 am-u-sm-push-3">
-                                <button type="submit" class="am-btn am-btn-primary" id="save_modify">保存修改</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
@@ -150,8 +110,6 @@
 <script src="js/app.js"></script>
 <script src="js/layer/layer.js"></script>
 <script src="js/page/common.js"></script>
-
-    <script src="js/page/person.js"></script>
 
 </body>
 </html>
