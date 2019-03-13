@@ -15,6 +15,7 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="css/amazeui.min.css"/>
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/pintuer.css">
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -78,7 +79,7 @@
     
     <div class="admin-content">
         <div class="admin-content-body">
-            <div class="am-cf am-padding">
+            <div class="am-cf am-padding">10
                 <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> / <small>一些常用模块</small></div>
             </div>
 
