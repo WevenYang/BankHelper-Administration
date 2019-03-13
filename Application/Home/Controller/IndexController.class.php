@@ -218,8 +218,8 @@ class IndexController extends Controller {
             );
         }else{
             $formerpwd = explode("-", $token);
-            if (md5($former) == $formerpwd[1]){
-                $data = M("person_info") -> where('id='.$userId)-> setField("password", $newPwd);
+            if ($former == $formerpwd[1]){
+                $data = M("person_info") -> where('id='.$userId)-> setField("password", md5($newPwd));
                 if($data){
                     $arr = array(
                         "Code" => 200,
@@ -267,8 +267,8 @@ class IndexController extends Controller {
             );
         }else{
             $formerpwd = explode("-", $token);
-            if (md5($former) == $formerpwd[1]){
-                $result = $data -> where('id='.$userId)-> setField("paypassword", $newPwd);
+            if ($former == $formerpwd[1]){
+                $result = $data -> where('id='.$userId)-> setField("paypassword", md5($newPwd));
                 if($result){
                     $arr = array(
                         "Code" => 200,

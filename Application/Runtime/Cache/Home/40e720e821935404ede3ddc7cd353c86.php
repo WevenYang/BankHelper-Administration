@@ -3,18 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amaze UI Admin 404 Examples</title>
+    <title>银行小不懂</title>
     <meta name="description" content="这是一个404页面">
     <meta name="keywords" content="404">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <base href="/dashboard/www/BankHelperAdministration/Public/">
-    <link rel="icon" type="image/png" href="i/favicon.png">
+    <link rel="icon" type="image/png" href="i/nav_icon.png">
     <link rel="apple-touch-icon-precomposed" href="i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="css/amazeui.min.css"/>
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/pintuer.css">
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -78,14 +79,35 @@
     
     <div class="admin-content">
         <div class="admin-content-body">
-            <div class="about_content">
-                <img src="images/default.png"/>
-                <p style="font-size: 20px;">南方头条</p>
-                <p>版本：V1.0</p>
-            </div>
-            <div class="about_footer">
-                <p>CopyRight 2018-2019</p> <p>南方头条 提供技术支持</p>
+            <div class="panel admin-panel">
+                <div class="panel-head"><strong class="icon-reorder"> 最新列表</strong></div>
+                <div class="padding border-bottom">
+                    <button type="button" class="button border-yellow" ><span class="icon-plus-square-o"></span> 全部阅过</button>
+                </div>
+                <div id="load">
+                    <table class="table table-hover">
+                        <tr>
+                            <th width="10%">ID</th>
+                            <th width="20%">头像</th>
+                            <th width="15%">作者Id</th>
+                            <th width="20%">留言内容</th>
+                            <th width="10%">留言时间</th>
+                            <th width="15%">操作</th>
+                        </tr>
+                        <?php if(is_array($item1)): foreach($item1 as $key=>$fb): ?><tr>
+                                <td><?php echo ($fb["id"]); ?></td>
+                                <td><img src="images/11.jpg" alt="" width="120" height="50"></td>
+                                <td><?php echo ($fb["user_id"]); ?></td>
+                                <td><?php echo ($fb["content"]); ?></td>
+                                <td><?php echo ($fb["date"]); ?></td>
+                                <td><div class=\"button-group">
+                                    <a class="button border-main" onclick="return pass(1,1)"><span class="icon-edit"></span> 阅过</a>
+                                </div>
+                                </td>
+                            </tr><?php endforeach; endif; ?>
 
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -110,6 +132,24 @@
 <script src="js/app.js"></script>
 <script src="js/layer/layer.js"></script>
 <script src="js/page/common.js"></script>
+
+    <script language="JavaScript">
+        function pass(id, mid){
+            if(confirm("您确定阅过吗？"))
+            {
+                var table = document.getElementsByClassName("table")
+                s="";
+                for(var i = 0; i<table.rows.length ; i++){
+                    var onerow = table.rows[i];
+                    for(var j = 0,l2 = onerow.cells.length; j< l2;j++){
+                        s += onerow.cells[j].innerText;
+                    }
+                    s+="\n"
+                }
+                alert("fuck");
+            }
+        }
+    </script>
 
 </body>
 </html>
