@@ -3,18 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amaze UI Admin 404 Examples</title>
+    <title>银行小不懂</title>
     <meta name="description" content="这是一个404页面">
     <meta name="keywords" content="404">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <base href="/dashboard/www/Thinkphp3.2/test/Public/">
-    <link rel="icon" type="image/png" href="i/favicon.png">
+    <base href="/dashboard/www/BankHelperAdministration/Public/">
+    <link rel="icon" type="image/png" href="i/nav_icon.png">
     <link rel="apple-touch-icon-precomposed" href="i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="css/amazeui.min.css"/>
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/pintuer.css">
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -24,7 +25,7 @@
 
 <header class="am-topbar am-topbar-inverse admin-header">
     <div class="am-topbar-brand">
-        <strong>Amaze UI</strong> <small>后台管理模板</small>
+        <strong>银行小不懂</strong> <small>后台管理</small>
     </div>
 
     <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
@@ -54,18 +55,21 @@
             <ul class="am-list admin-sidebar-list">
                 <li><a href="../Home/index"><span class="am-icon-home"></span> 首页</a></li>
                 <li class="admin-parent">
-                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 页面模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                        <li><a href="admin-user.html" class="am-cf"><span class="am-icon-check"></span> 个人资料<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-                        <li><a href="admin-help.html"><span class="am-icon-puzzle-piece"></span> 帮助页</a></li>
-                        <li><a href="admin-gallery.html"><span class="am-icon-th"></span> 相册页面<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
-                        <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
-                        <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-apply'}"><span class="am-icon-file"></span> 用户申请 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-apply">
+                        <li><a href="../Home/ImportIn" class="am-cf"><span class="am-icon-check"></span> 定期转入<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                        <li><a href="../Home/ImportOut"><span class="am-icon-puzzle-piece"></span> 定期转出</a></li>
                     </ul>
                 </li>
-                <li><a href="../Home/home"><span class="am-icon-table"></span> 主页模块</a></li>
-                <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
-                <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-other'}"><span class="am-icon-file"></span> 其他 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-other">
+                        <li><a href="../Home/Feedback.html"><span class="am-icon-th"></span> 意见反馈</a></li>
+                        <li><a href="../Home/RiskReport"><span class="am-icon-calendar"></span> 风险举报</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="am-icon-sign-out"></span> 退出账号</a></li>
+
             </ul>
         </div>
     </div>
@@ -128,7 +132,6 @@
         </div>
     </div>
 
-
     <!-- content end -->
 
 </div>
@@ -137,19 +140,18 @@
 
 <footer>
     <hr>
-    <p class="am-padding-left">© 2018 AllMobilize, Inc. Licensed under MIT license.</p>
+    <p class="am-padding-left">© 2019 AllMobilize, Inc. Licensed under MIT license.</p>
 </footer>
 
 <!--[if lt IE 9]><![endif]-->
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="js/amazeui.ie8polyfill.min.js"></script>
-<script src="js/page/common.js"></script>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="js/jquery.min.js"></script>
 <!--<![endif]-->
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+<script src="js/layer/layer.js"></script>
+<script src="js/page/common.js"></script>
 
 </body>
 </html>
