@@ -81,29 +81,25 @@
     <div class="admin-content">
         <div class="admin-content-body">
             <div class="panel admin-panel">
-                <div class="panel-head"><strong class="icon-reorder"> 最新列表</strong></div>
-                <div class="padding border-bottom">
-                    <button type="button" class="button border-yellow" ><span class="icon-plus-square-o"></span> 全部阅过</button>
-                </div>
                 <div id="load">
                     <table class="table table-hover">
                         <tr>
                             <th width="10%">ID</th>
                             <th width="20%">头像</th>
-                            <th width="15%">作者Id</th>
-                            <th width="20%">留言内容</th>
-                            <th width="10%">留言时间</th>
-                            <th width="15%">操作</th>
+                            <th width="15%">账号</th>
+                            <th width="20%">昵称</th>
+                            <th width="10%">性别</th>
+                            <th width="15%">身份证类型</th>
+                            <th width="15%">身份证号码</th>
                         </tr>
-                        <?php if(is_array($item1)): foreach($item1 as $key=>$fb): ?><tr>
-                                <td><?php echo ($fb["id"]); ?></td>
+                        <?php if(is_array($item1)): foreach($item1 as $key=>$user): ?><tr>
+                                <td><?php echo ($user["id"]); ?></td>
                                 <td><img src="images/11.jpg" alt="" width="120" height="50"></td>
-                                <td><?php echo ($fb["user_id"]); ?></td>
-                                <td><?php echo ($fb["content"]); ?></td>
-                                <td><?php echo ($fb["date"]); ?></td>
-                                <td><div class=\"button-group">
-                                    <a class="button border-main" onclick="return pass(1,1)"><span class="icon-edit"></span> 阅过</a>
-                                </div>
+                                <td><?php echo ($user["account"]); ?></td>
+                                <td><?php echo ($user["nickname"]); ?></td>
+                                <td><?php echo ($user["sex"]); ?></td>
+                                <td><?php echo ($user["cardtype"]); ?></td>
+                                <td><?php echo ($user["cardnum"]); ?></td>
                                 </td>
                             </tr><?php endforeach; endif; ?>
 
@@ -133,24 +129,6 @@
 <script src="js/app.js"></script>
 <script src="js/layer/layer.js"></script>
 <script src="js/page/common.js"></script>
-
-    <script language="JavaScript">
-        function pass(id, mid){
-            if(confirm("您确定阅过吗？"))
-            {
-                var table = document.getElementsByClassName("table")
-                s="";
-                for(var i = 0; i<table.rows.length ; i++){
-                    var onerow = table.rows[i];
-                    for(var j = 0,l2 = onerow.cells.length; j< l2;j++){
-                        s += onerow.cells[j].innerText;
-                    }
-                    s+="\n"
-                }
-                alert("fuck");
-            }
-        }
-    </script>
 
 </body>
 </html>
