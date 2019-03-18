@@ -436,20 +436,40 @@ class IndexController extends Controller {
 //        }else{
         //0代表转入，1代表转出
         if ($type == 0){
-            $before_current_deposit = M("person_card") -> where("id='%s'", $userId) -> getField("current_deposit");
-            $after_current_deposit = $before_current_deposit - $transfer_money;
-            $after_fix_deposit = $before_fix_deposit + $transfer_money;
-            //不可重复使用$data,原因估计是该赋值只指定数据库一次
-            $result1 = M("person_card") -> where("id='%s'", $userId) -> setField('current_deposit', $after_current_deposit);
-            $result2 = M("person_card") -> where("id='%s'", $userId) -> setField('fixed_deposit', $after_fix_deposit);
-            if (($this -> saveMessage(2, $transfer_money)) && $result1 && $result2){
+//            $before_current_deposit = M("person_card") -> where("id='%s'", $userId) -> getField("current_deposit");
+//            $after_current_deposit = $before_current_deposit - $transfer_money;
+//            $after_fix_deposit = $before_fix_deposit + $transfer_money;
+//            //不可重复使用$data,原因估计是该赋值只指定数据库一次
+//            $result1 = M("person_card") -> where("id='%s'", $userId) -> setField('current_deposit', $after_current_deposit);
+//            $result2 = M("person_card") -> where("id='%s'", $userId) -> setField('fixed_deposit', $after_fix_deposit);
+//            if (($this -> saveMessage(2, $transfer_money)) && $result1 && $result2){
+//                $arr = array(
+//                    "Code" => 200,
+//                    "Data" => "",
+//                    "Success" => true,
+//                    "Message" => "操作成功"
+//                );
+//            }else{
+//                $arr = array(
+//                    "Code" => 200,
+//                    "Data" => "",
+//                    "Success" => false,
+//                    "Message" => "操作失败"
+//                );
+//            }
+            $info['c_id'] = $userId;
+            $info['num'] = $transfer_money;
+            $info['apply_time'] = $now;
+            $info['status'] = 0;
+            $result = M("transfer_info") -> add($info);
+            if (($this -> saveMessage(2, $transfer_money)) && $result){
                 $arr = array(
                     "Code" => 200,
                     "Data" => "",
                     "Success" => true,
                     "Message" => "操作成功"
                 );
-            }else{
+            }else {
                 $arr = array(
                     "Code" => 200,
                     "Data" => "",
@@ -645,7 +665,7 @@ class IndexController extends Controller {
     //保存信息接口
     public function saveMessage($type, $num){
         $data = M("bank_message");
-        //0为充值，1为转账，2为转入定期，3为转出定期，4为提现
+        //0为充值，1为转账，2为转入定期，3为转出定期，4为提现，5为转入定期审核通知
         $now = date("y-m-d");
         $condition["type"] = $type;
         $condition["num"] = $num;
