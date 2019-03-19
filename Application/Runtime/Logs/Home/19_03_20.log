@@ -1,0 +1,168 @@
+[ 2019-03-20T00:05:13+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/getFixDeposit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000782s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000819s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000841s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 948 行.
+SQL: SHOW COLUMNS FROM `person_card` [ RunTime:0.0425s ]
+SQL: SELECT `fixed_deposit` FROM `person_card` WHERE ( id = '1' ) LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000896s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000913s ]
+
+[ 2019-03-20T00:05:18+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/getBankMessage
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000760s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000561s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000600s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 948 行.
+SQL: SHOW COLUMNS FROM `bank_message` [ RunTime:0.0363s ]
+SQL: SELECT * FROM `bank_message` ORDER BY id desc  [ RunTime:0.0066s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000794s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000822s ]
+
+[ 2019-03-20T00:05:21+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/queryBalance
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000006s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000340s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000495s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000515s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 948 行.
+SQL: SHOW COLUMNS FROM `person_card` [ RunTime:0.0168s ]
+SQL: SELECT `total` FROM `person_card` WHERE ( id = '1' ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001226s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001309s ]
+
+[ 2019-03-20T00:05:28+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/getCurrentDeposit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000006s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000350s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000563s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000591s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 948 行.
+SQL: SHOW COLUMNS FROM `person_card` [ RunTime:0.0362s ]
+SQL: SELECT `current_deposit` FROM `person_card` WHERE ( id = '1' ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000690s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000718s ]
+
+[ 2019-03-20T00:05:46+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000006s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000389s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000752s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000775s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 948 行.
+SQL: SHOW COLUMNS FROM `person_info` [ RunTime:0.0181s ]
+SQL: SELECT * FROM `person_info` WHERE `account` = 'weven' AND `password` = 'e10adc3949ba59abbe56e057f20f883e' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT `id` FROM `person_info` WHERE `account` = 'weven' AND `password` = 'e10adc3949ba59abbe56e057f20f883e' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `paypassword` FROM `person_info` WHERE `account` = 'weven' AND `password` = 'e10adc3949ba59abbe56e057f20f883e' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `account` FROM `person_info` WHERE `account` = 'weven' AND `password` = 'e10adc3949ba59abbe56e057f20f883e' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT `icon` FROM `person_info` WHERE `account` = 'weven' AND `password` = 'e10adc3949ba59abbe56e057f20f883e' LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000859s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000878s ]
+
+[ 2019-03-20T00:05:46+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/getPersonCard
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000484s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000733s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000768s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 948 行.
+SQL: SHOW COLUMNS FROM `person_card` [ RunTime:0.0447s ]
+SQL: SELECT * FROM `person_card` WHERE ( u_id = '1' ) ORDER BY id desc  [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000676s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000699s ]
+
+[ 2019-03-20T00:07:03+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/getFixDeposit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000390s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000523s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000548s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 948 行.
+SQL: SHOW COLUMNS FROM `person_card` [ RunTime:0.1679s ]
+SQL: SELECT `fixed_deposit` FROM `person_card` WHERE ( id = '1' ) LIMIT 1   [ RunTime:0.0006s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000869s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000940s ]
+
+[ 2019-03-20T00:07:04+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/getCurrentDeposit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000693s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000559s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000585s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 948 行.
+SQL: SHOW COLUMNS FROM `person_card` [ RunTime:0.0185s ]
+SQL: SELECT `current_deposit` FROM `person_card` WHERE ( id = '1' ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001744s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001774s ]
+
+[ 2019-03-20T00:07:22+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/transfer
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000419s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000641s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000668s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 948 行.
+SQL: SHOW COLUMNS FROM `transfer_info` [ RunTime:0.2667s ]
+SQL: INSERT INTO `transfer_info` (`c_id`,`num`,`apply_time`,`status`) VALUES ('1','2','19-03-20 00:07:21','0') [ RunTime:0.1746s ]
+SQL: SHOW COLUMNS FROM `bank_message` [ RunTime:0.0323s ]
+SQL: INSERT INTO `bank_message` (`type`,`num`,`date`) VALUES ('2','2','19-03-20') [ RunTime:0.0586s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001074s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001101s ]
+
+[ 2019-03-20T00:18:18+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/getPersonCard
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000969s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000705s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000747s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 948 行.
+SQL: SHOW COLUMNS FROM `person_card` [ RunTime:0.0330s ]
+SQL: SELECT * FROM `person_card` WHERE ( u_id = '1' ) ORDER BY id desc  [ RunTime:0.0006s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000946s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000970s ]
+
+[ 2019-03-20T00:39:33+08:00 ] ::1 /dashboard/www/BankHelperAdministration/Home/ImportIn
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000582s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000910s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000933s ]
+SQL: SHOW COLUMNS FROM `transfer_info` [ RunTime:0.0143s ]
+SQL: SELECT * FROM `transfer_info` WHERE ( status = 0 )  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000038s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000062s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.033808s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.033838s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000447s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000463s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000658s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000681s ]
+
