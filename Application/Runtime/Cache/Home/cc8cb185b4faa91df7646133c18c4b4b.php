@@ -100,8 +100,8 @@
                                 <td><?php echo ($tc["num"]); ?></td>
                                 <td><?php echo ($tc["duration"]); ?></td>
                                 <td><?php echo ($tc["apply_time"]); ?></td>
-                                <td><div class=\"button-group">
-                                    <a class="button border-main" onclick="return pass(1,1)"><span class="icon-edit"></span> 审核通过</a>
+                                <td><div class="button-group">
+                                    <a class="button border-main" onclick="return pass(1, <?php echo ($tc["id"]); ?>)"><span class="icon-edit"></span> 审核通过</a>
                                     <a class="button border-red" onclick="return dispass(1,1)"><span class="icon-edit"></span> 审核拒绝</a>
                                 </div>
                                 </td>
@@ -138,16 +138,16 @@
         function pass(id, mid){
             if(confirm("您确定审核通过吗？"))
             {
-                var table = document.getElementsByClassName("table")
-                s="";
-                for(var i = 0; i<table.rows.length ; i++){
-                    var onerow = table.rows[i];
-                    for(var j = 0,l2 = onerow.cells.length; j< l2;j++){
-                        s += onerow.cells[j].innerText;
-                    }
-                    s+="\n"
-                }
-                alert("fuck");
+//                var table = document.getElementsByClassName("table")
+//                s="";
+//                for(var i = 0; i<table.rows.length ; i++){
+//                    var onerow = table.rows[i];
+//                    for(var j = 0,l2 = onerow.cells.length; j< l2;j++){
+//                        s += onerow.cells[j].innerText;
+//                    }
+//                    s+="\n"
+//                }
+                alert(mid);
             }
         }
 

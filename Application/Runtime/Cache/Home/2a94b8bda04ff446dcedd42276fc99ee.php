@@ -83,11 +83,11 @@
                 <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> / <small>一些常用模块</small></div>
             </div>
 
-            <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-                <li><a href="#" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>用户总量<br/>2300</a></li>
+            <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list" >
+                <li><a href="#" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>未审核<br/>2300</a></li>
                 <li><a href="#" class="am-text-warning"><span class="am-icon-btn am-icon-briefcase"></span><br/>昨日反馈<br/>0</a></li>
                 <li><a href="#" class="am-text-danger"><span class="am-icon-btn am-icon-recycle"></span><br/>昨日访问<br/>25</a></li>
-                <li><a href="#" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>未审核<br/>0</a></li>
+                <li><a href="#" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>用户总量<br/>0</a></li>
             </ul>
 
         </div>
