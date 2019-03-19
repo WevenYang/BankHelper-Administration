@@ -59,7 +59,6 @@
                     <a class="am-cf" data-am-collapse="{target: '#collapse-apply'}"><span class="am-icon-file"></span> 用户申请 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                     <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-apply">
                         <li><a href="../Home/ImportIn" class="am-cf"><span class="am-icon-check"></span> 定期转入<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-                        <li><a href="../Home/ImportOut"><span class="am-icon-puzzle-piece"></span> 定期转出</a></li>
                     </ul>
                 </li>
                 <li class="admin-parent">

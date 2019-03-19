@@ -59,7 +59,6 @@
                     <a class="am-cf" data-am-collapse="{target: '#collapse-apply'}"><span class="am-icon-file"></span> 用户申请 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                     <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-apply">
                         <li><a href="../Home/ImportIn" class="am-cf"><span class="am-icon-check"></span> 定期转入<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-                        <li><a href="../Home/ImportOut"><span class="am-icon-puzzle-piece"></span> 定期转出</a></li>
                     </ul>
                 </li>
                 <li class="admin-parent">
@@ -80,14 +79,36 @@
     
     <div class="admin-content">
         <div class="admin-content-body">
-            <div class="about_content">
-                <img src="images/default.png"/>
-                <p style="font-size: 20px;">南方头条</p>
-                <p>版本：V1.0</p>
-            </div>
-            <div class="about_footer">
-                <p>CopyRight 2018-2019</p> <p>南方头条 提供技术支持</p>
+            <div class="panel admin-panel">
+                <div class="panel-head"><strong class="icon-reorder"> 最新列表</strong></div>
+                <div class="padding border-bottom">
+                    <button type="button" class="button border-yellow" ><span class="icon-plus-square-o"></span> 全部审核通过</button>
+                </div>
+                <div id="load">
+                    <table class="table table-hover">
+                        <tr>
+                            <th width="10%">申请ID</th>
+                            <th width="20%">卡ID</th>
+                            <th width="15%">转入数额(元)</th>
+                            <th width="20%">定期时间(月)</th>
+                            <th width="10%">申请时间</th>
+                            <th width="15%">操作</th>
+                        </tr>
+                        <?php if(is_array($item1)): foreach($item1 as $key=>$tc): ?><tr>
+                                <td><?php echo ($tc["id"]); ?></td>
+                                <td><?php echo ($tc["c_id"]); ?></td>
+                                <td><?php echo ($tc["num"]); ?></td>
+                                <td><?php echo ($tc["duration"]); ?></td>
+                                <td><?php echo ($tc["apply_time"]); ?></td>
+                                <td><div class=\"button-group">
+                                    <a class="button border-main" onclick="return pass(1,1)"><span class="icon-edit"></span> 审核通过</a>
+                                    <a class="button border-red" onclick="return dispass(1,1)"><span class="icon-edit"></span> 审核拒绝</a>
+                                </div>
+                                </td>
+                            </tr><?php endforeach; endif; ?>
 
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -112,6 +133,40 @@
 <script src="js/app.js"></script>
 <script src="js/layer/layer.js"></script>
 <script src="js/page/common.js"></script>
+
+    <script language="JavaScript">
+        function pass(id, mid){
+            if(confirm("您确定审核通过吗？"))
+            {
+                var table = document.getElementsByClassName("table")
+                s="";
+                for(var i = 0; i<table.rows.length ; i++){
+                    var onerow = table.rows[i];
+                    for(var j = 0,l2 = onerow.cells.length; j< l2;j++){
+                        s += onerow.cells[j].innerText;
+                    }
+                    s+="\n"
+                }
+                alert("fuck");
+            }
+        }
+
+        function dispass(id, mid){
+            if(confirm("您确定拒绝该审核吗？"))
+            {
+//                var table = document.getElementsByClassName("table")
+//                s="";
+//                for(var i = 0; i<table.rows.length ; i++){
+//                    var onerow = table.rows[i];
+//                    for(var j = 0,l2 = onerow.cells.length; j< l2;j++){
+//                        s += onerow.cells[j].innerText;
+//                    }
+//                    s+="\n"
+//                }
+//                alert("fuck");
+            }
+        }
+    </script>
 
 </body>
 </html>
