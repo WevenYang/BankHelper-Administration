@@ -27,4 +27,10 @@ class ImportInController extends Controller
         }
         return $array;
     }
+
+    public function passTransferApply($id){
+        
+    }
+
+
 }
