@@ -28,8 +28,25 @@ class ImportInController extends Controller
         return $array;
     }
 
-    public function passTransferApply($id){
-
+    public function passTransferApply($id, $status){
+        header('content-type:application/json;charset=utf8');
+        $list = M("transfer_info")-> where("id='%s'", $id) -> setField("status", $status);
+        if ($list) {
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => true,
+                "Message" => "操作成功"
+            );
+        } else {
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "操作失败"
+            );
+        }
+        echo json_encode($arr);
     }
 
 
