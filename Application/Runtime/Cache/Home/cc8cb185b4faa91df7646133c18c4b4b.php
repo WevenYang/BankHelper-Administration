@@ -101,8 +101,8 @@
                                 <td><?php echo ($tc["duration"]); ?></td>
                                 <td><?php echo ($tc["apply_time"]); ?></td>
                                 <td><div class="button-group">
-                                    <a class="button border-main" onclick="return pass(1, <?php echo ($tc["id"]); ?>)"><span class="icon-edit"></span> 审核通过</a>
-                                    <a class="button border-red" onclick="return dispass(1,1)"><span class="icon-edit"></span> 审核拒绝</a>
+                                    <a class="button border-main" onclick="return pass(<?php echo ($tc["id"]); ?>)"><span class="icon-edit"></span> 审核通过</a>
+                                    <a class="button border-red" onclick="return dispass(<?php echo ($tc["id"]); ?>)"><span class="icon-edit"></span> 审核拒绝</a>
                                 </div>
                                 </td>
                             </tr><?php endforeach; endif; ?>
@@ -135,7 +135,7 @@
 <script src="js/page/common.js"></script>
 
     <script language="JavaScript">
-        function pass(id, mid){
+        function pass(mid){
             if(confirm("您确定审核通过吗？"))
             {
 //                var table = document.getElementsByClassName("table")
@@ -151,7 +151,7 @@
             }
         }
 
-        function dispass(id, mid){
+        function dispass(mid){
             if(confirm("您确定拒绝该审核吗？"))
             {
 //                var table = document.getElementsByClassName("table")
