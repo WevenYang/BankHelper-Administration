@@ -101,8 +101,8 @@
                                 <td><?php echo ($tc["duration"]); ?></td>
                                 <td><?php echo ($tc["apply_time"]); ?></td>
                                 <td><div class="button-group">
-                                    <a class="button border-main" onclick="return pass(<?php echo ($tc["id"]); ?>)"><span class="icon-edit"></span> 审核通过</a>
-                                    <a class="button border-red" onclick="return dispass(<?php echo ($tc["id"]); ?>)"><span class="icon-edit"></span> 审核拒绝</a>
+                                    <a class="button border-main" onclick="return pass(<?php echo ($tc["id"]); ?>, <?php echo ($tc["num"]); ?>)"><span class="icon-edit"></span> 审核通过</a>
+                                    <a class="button border-red" onclick="return dispass(<?php echo ($tc["id"]); ?>, <?php echo ($tc["num"]); ?>)"><span class="icon-edit"></span> 审核拒绝</a>
                                 </div>
                                 </td>
                             </tr><?php endforeach; endif; ?>
@@ -135,35 +135,78 @@
 <script src="js/page/common.js"></script>
 
     <script language="JavaScript">
-        function pass(mid){
+        function pass(mid, money){
             if(confirm("您确定审核通过吗？"))
             {
-//                var table = document.getElementsByClassName("table")
-//                s="";
-//                for(var i = 0; i<table.rows.length ; i++){
-//                    var onerow = table.rows[i];
-//                    for(var j = 0,l2 = onerow.cells.length; j< l2;j++){
-//                        s += onerow.cells[j].innerText;
-//                    }
-//                    s+="\n"
-//                }
-                alert(mid);
+                $.ajax({
+                    url: "../Home/ImportIn/passTransferApply",
+                    type:"get",
+                    data:{
+                        id: mid,
+                        status: 1,
+                        transfer_money: money,
+                    },
+                    beforeSend: function () {
+                        layIndex = layer.msg("加载中...", { icon: 16, shade: 0.01 });
+                    },
+                    complete: function () {
+                        layer.close(layIndex);
+                    },
+                    success: function (res) {
+                        if (res.Success) {
+                            layer.msg('操作成功', {
+                                closeBtn: 0
+                            }, function () {
+                                layer.close(layer.index);
+//                                location.reload();
+                            });
+
+                        } else {
+                            layer.alert(res.Message, { icon: 5 });
+                        }
+                    },
+                    error: function (res) {
+                        layer.alert("发生未知错误，请联系管理员", { icon: 5 });
+                    }
+                });
             }
         }
 
-        function dispass(mid){
+        function dispass(mid, money){
             if(confirm("您确定拒绝该审核吗？"))
             {
-//                var table = document.getElementsByClassName("table")
-//                s="";
-//                for(var i = 0; i<table.rows.length ; i++){
-//                    var onerow = table.rows[i];
-//                    for(var j = 0,l2 = onerow.cells.length; j< l2;j++){
-//                        s += onerow.cells[j].innerText;
-//                    }
-//                    s+="\n"
-//                }
-//                alert("fuck");
+
+                $.ajax({
+                    url: "../Home/ImportIn/passTransferApply",
+                    type:"get",
+                    data:{
+                        id: mid,
+                        status: 2,
+                        transfer_money: money,
+                    },
+                    beforeSend: function () {
+                        layIndex = layer.msg("加载中...", { icon: 16, shade: 0.01 });
+                    },
+                    complete: function () {
+                        layer.close(layIndex);
+                    },
+                    success: function (res) {
+                        if (res.Success) {
+                            layer.msg('操作成功', {
+                                closeBtn: 0
+                            }, function () {
+                                layer.close(layer.index);
+                                location.reload();
+                            });
+
+                        } else {
+                            layer.alert(res.Message, { icon: 5 });
+                        }
+                    },
+                    error: function (res) {
+                        layer.alert("发生未知错误，请联系管理员", { icon: 5 });
+                    }
+                });
             }
         }
     </script>

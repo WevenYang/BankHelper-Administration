@@ -28,16 +28,56 @@ class ImportInController extends Controller
         return $array;
     }
 
-    public function passTransferApply($id, $status){
+    //审核是否通过,status为1为通过，2为拒绝
+    public function passTransferApply($id, $status, $transfer_money){
         header('content-type:application/json;charset=utf8');
         $list = M("transfer_info")-> where("id='%s'", $id) -> setField("status", $status);
         if ($list) {
-            $arr = array(
-                "Code" => 200,
-                "Data" => "",
-                "Success" => true,
-                "Message" => "操作成功"
-            );
+            if ($status == 1){
+                $before_fix_deposit = M("person_card") -> where("id='%s'", $id) -> getField("fix_deposit");
+                $before_current_deposit = M("person_card") -> where("id='%s'", $id) -> getField("current_deposit");
+                $after_current_deposit = $before_current_deposit - $transfer_money;
+                $after_fix_deposit = $before_fix_deposit + $transfer_money;
+                //不可重复使用$data,原因估计是该赋值只指定数据库一次
+                $result1 = M("person_card") -> where("id='%s'", $id) -> setField('current_deposit', $after_current_deposit);
+                $result2 = M("person_card") -> where("id='%s'", $id) -> setField('fixed_deposit', $after_fix_deposit);
+                if (($this -> saveMessage(2, $transfer_money)) && $result1 && $result2){
+                    $arr = array(
+                        "Code" => 200,
+                        "Data" => "",
+                        "Success" => true,
+                        "Message" => "操作成功"
+                    );
+                }else{
+                    $arr = array(
+                        "Code" => 200,
+                        "Data" => "",
+                        "Success" => false,
+                        "Message" => "操作失败"
+                    );
+                }
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => true,
+                    "Message" => "审核已成功"
+                );
+            }else if($status == 2){
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => true,
+                    "Message" => "审核已拒绝"
+                );
+            }else {
+                $arr = array(
+                    "Code" => 200,
+                    "Data" => "",
+                    "Success" => false,
+                    "Message" => "操作失败"
+                );
+            }
+
         } else {
             $arr = array(
                 "Code" => 200,
