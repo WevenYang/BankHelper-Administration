@@ -425,6 +425,7 @@ class IndexController extends Controller {
         $token = I("post.token");
         $transfer_money = I("post.num");
         $before_fix_deposit = I("post.fix_deposit");
+        $duration = I("post.duration");
         $client = strstr($token, "15");
 //        if (strstr(strtotime($now), "15") - $client > 7200){
 //            $arr = array(
@@ -461,6 +462,7 @@ class IndexController extends Controller {
             $info['num'] = $transfer_money;
             $info['apply_time'] = $now;
             $info['status'] = 0;
+            $info['duration'] = $duration;
             $result = M("transfer_info") -> add($info);
             if (($this -> saveMessage(2, $transfer_money)) && $result){
                 $arr = array(

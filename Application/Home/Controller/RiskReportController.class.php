@@ -27,4 +27,25 @@ class RiskReportController extends Controller
         }
         return $array;
     }
+
+    public function haveRead($id, $status){
+        header('content-type:application/json;charset=utf8');
+        $list = M("risk")-> where("id='%s'", $id) -> setField("type", $status);
+        if ($list) {
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => true,
+                "Message" => "操作成功"
+            );
+        } else {
+            $arr = array(
+                "Code" => 200,
+                "Data" => "",
+                "Success" => false,
+                "Message" => "操作失败"
+            );
+        }
+        echo json_encode($arr);
+    }
 }

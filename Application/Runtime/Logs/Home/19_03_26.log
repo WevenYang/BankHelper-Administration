@@ -1,0 +1,14 @@
+[ 2019-03-26T00:00:13+08:00 ] 192.168.1.6 /dashboard/www/BankHelperAdministration/home/index/getBankMessage
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000512s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000758s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000788s ]
+NOTIC: [2] Declaration of Home\Controller\IndexController::show() should be compatible with Think\Controller::show($content, $charset = '', $contentType = '', $prefix = '') F:\NewXampp\htdocs\dashboard\www\BankHelperAdministration\Application\Home\Controller\IndexController.class.php 第 950 行.
+SQL: SHOW COLUMNS FROM `bank_message` [ RunTime:0.0164s ]
+SQL: SELECT * FROM `bank_message` ORDER BY id desc  [ RunTime:0.0005s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000863s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000894s ]
+

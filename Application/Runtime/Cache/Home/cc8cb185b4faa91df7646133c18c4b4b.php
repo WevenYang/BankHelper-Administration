@@ -101,8 +101,8 @@
                                 <td><?php echo ($tc["duration"]); ?></td>
                                 <td><?php echo ($tc["apply_time"]); ?></td>
                                 <td><div class="button-group">
-                                    <a class="button border-main" onclick="return pass(<?php echo ($tc["id"]); ?>, <?php echo ($tc["num"]); ?>)"><span class="icon-edit"></span> 审核通过</a>
-                                    <a class="button border-red" onclick="return dispass(<?php echo ($tc["id"]); ?>, <?php echo ($tc["num"]); ?>)"><span class="icon-edit"></span> 审核拒绝</a>
+                                    <a class="button border-main" onclick="return pass(<?php echo ($tc["id"]); ?>, <?php echo ($tc["num"]); ?>, <?php echo ($tc["c_id"]); ?>)"><span class="icon-edit"></span> 审核通过</a>
+                                    <a class="button border-red" onclick="return dispass(<?php echo ($tc["id"]); ?>, <?php echo ($tc["num"]); ?>, <?php echo ($tc["c_id"]); ?>)"><span class="icon-edit"></span> 审核拒绝</a>
                                 </div>
                                 </td>
                             </tr><?php endforeach; endif; ?>
@@ -135,7 +135,7 @@
 <script src="js/page/common.js"></script>
 
     <script language="JavaScript">
-        function pass(mid, money){
+        function pass(mid, money, c_id){
             if(confirm("您确定审核通过吗？"))
             {
                 $.ajax({
@@ -145,6 +145,7 @@
                         id: mid,
                         status: 1,
                         transfer_money: money,
+                        card_id: c_id,
                     },
                     beforeSend: function () {
                         layIndex = layer.msg("加载中...", { icon: 16, shade: 0.01 });
@@ -158,7 +159,7 @@
                                 closeBtn: 0
                             }, function () {
                                 layer.close(layer.index);
-//                                location.reload();
+                                location.reload();
                             });
 
                         } else {
@@ -172,7 +173,7 @@
             }
         }
 
-        function dispass(mid, money){
+        function dispass(mid, money, c_id){
             if(confirm("您确定拒绝该审核吗？"))
             {
 
@@ -181,8 +182,9 @@
                     type:"get",
                     data:{
                         id: mid,
-                        status: 2,
+                        status: 1,
                         transfer_money: money,
+                        card_id: c_id,
                     },
                     beforeSend: function () {
                         layIndex = layer.msg("加载中...", { icon: 16, shade: 0.01 });

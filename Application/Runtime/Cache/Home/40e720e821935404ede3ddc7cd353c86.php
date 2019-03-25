@@ -81,9 +81,6 @@
         <div class="admin-content-body">
             <div class="panel admin-panel">
                 <div class="panel-head"><strong class="icon-reorder"> 最新列表</strong></div>
-                <div class="padding border-bottom">
-                    <button type="button" class="button border-yellow" ><span class="icon-plus-square-o"></span> 全部阅过</button>
-                </div>
                 <div id="load">
                     <table class="table table-hover">
                         <tr>
@@ -101,7 +98,7 @@
                                 <td><?php echo ($fb["content"]); ?></td>
                                 <td><?php echo ($fb["date"]); ?></td>
                                 <td><div class=\"button-group">
-                                    <a class="button border-main" onclick="return pass(1,1)"><span class="icon-edit"></span> 阅过</a>
+                                    <a class="button border-main" onclick="return pass(<?php echo ($fb["id"]); ?>)"><span class="icon-edit"></span> 阅过</a>
                                 </div>
                                 </td>
                             </tr><?php endforeach; endif; ?>
@@ -134,19 +131,39 @@
 <script src="js/page/common.js"></script>
 
     <script language="JavaScript">
-        function pass(id, mid){
+        function pass(mid){
             if(confirm("您确定阅过吗？"))
             {
-                var table = document.getElementsByClassName("table")
-                s="";
-                for(var i = 0; i<table.rows.length ; i++){
-                    var onerow = table.rows[i];
-                    for(var j = 0,l2 = onerow.cells.length; j< l2;j++){
-                        s += onerow.cells[j].innerText;
+                $.ajax({
+                    url: "../Home/Feedback/haveRead",
+                    type:"get",
+                    data:{
+                        id: mid,
+                        status: 1,
+                    },
+                    beforeSend: function () {
+                        layIndex = layer.msg("加载中...", { icon: 16, shade: 0.01 });
+                    },
+                    complete: function () {
+                        layer.close(layIndex);
+                    },
+                    success: function (res) {
+                        if (res.Success) {
+                            layer.msg('操作成功', {
+                                closeBtn: 0
+                            }, function () {
+                                layer.close(layer.index);
+                                location.reload();
+                            });
+
+                        } else {
+                            layer.alert(res.Message, { icon: 5 });
+                        }
+                    },
+                    error: function (res) {
+                        layer.alert("发生未知错误，请联系管理员", { icon: 5 });
                     }
-                    s+="\n"
-                }
-                alert("fuck");
+                });
             }
         }
     </script>
