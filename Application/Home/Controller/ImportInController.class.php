@@ -41,6 +41,7 @@ class ImportInController extends Controller
                 //不可重复使用$data,原因估计是该赋值只指定数据库一次
                 $result1 = M("person_card") -> where("id='%s'", $id) -> setField('current_deposit', $after_current_deposit);
                 $result2 = M("person_card") -> where("id='%s'", $id) -> setField('fixed_deposit', $after_fix_deposit);
+//                $result3 = M("person_card") -> where("id='%s'", $id) -> setField('start_time', date("y-m-d H:i:s"));
                 if (($this -> saveMessage(2, $transfer_money)) && $result1 && $result2){
                     $arr = array(
                         "Code" => 200,
