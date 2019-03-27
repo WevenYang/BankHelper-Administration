@@ -48,7 +48,7 @@ class ImportInController extends Controller
                         "Code" => 200,
                         "Data" => "",
                         "Success" => true,
-                        "Message" => "操作成功"
+                        "Message" => "审核已成功"
                     );
                 }else{
                     $arr = array(
@@ -58,13 +58,9 @@ class ImportInController extends Controller
                         "Message" => "操作失败"
                     );
                 }
-                $arr = array(
-                    "Code" => 200,
-                    "Data" => "",
-                    "Success" => true,
-                    "Message" => "审核已成功"
-                );
+
             }else if($status == 2){
+                $index -> saveMessage(6, $transfer_money);
                 $arr = array(
                     "Code" => 200,
                     "Data" => "",

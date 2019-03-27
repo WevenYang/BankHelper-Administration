@@ -233,7 +233,7 @@ class IndexController extends Controller {
 //            );
 //        }else{
         $formerpwd = explode("-", $token);
-        if (md5($former) == $formerpwd[1]){
+//        if (md5($former) == $formerpwd[1]){
             $data = M("person_info") -> where('id='.$userId)-> setField("password", $newPwd);
             if($data){
                 $arr = array(
@@ -251,14 +251,14 @@ class IndexController extends Controller {
                 );
             }
 
-        }else {
-            $arr = array(
-                "Code" => 200,
-                "Data" => "",
-                "Success" => false,
-                "Message" => "原密码输入错误".$formerpwd
-            );
-        }
+//        }else {
+//            $arr = array(
+//                "Code" => 200,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "原密码输入错误".$formerpwd
+//            );
+//        }
 //        }
         echo json_encode($arr);
     }
@@ -282,7 +282,7 @@ class IndexController extends Controller {
 //            );
 //        }else{
         $formerpwd = explode("-", $token);
-        if (md5($former) == $formerpwd[1]){
+//        if (md5($former) == $formerpwd[1]){
             $result = $data -> where('id='.$userId)-> setField("paypassword", $newPwd);
             if($result){
                 $arr = array(
@@ -300,14 +300,14 @@ class IndexController extends Controller {
                 );
             }
 
-        }else {
-            $arr = array(
-                "Code" => 200,
-                "Data" => "",
-                "Success" => false,
-                "Message" => "原密码输入错误".$formerpwd
-            );
-        }
+//        }else {
+//            $arr = array(
+//                "Code" => 200,
+//                "Data" => "",
+//                "Success" => false,
+//                "Message" => "原密码输入错误".$formerpwd
+//            );
+//        }
 //        }
         echo json_encode($arr);
     }
@@ -667,7 +667,7 @@ class IndexController extends Controller {
     //保存信息接口
     public function saveMessage($type, $num){
         $data = M("bank_message");
-        //0为充值，1为转账，2为转入定期，3为转出定期，4为提现，5为转入定期审核通知
+        //0为充值，1为转账，2为转入定期，3为转出定期，4为提现，5为转入定期审核通过通知，6为转入定期审核拒绝通知
         $now = date("y-m-d");
         $condition["type"] = $type;
         $condition["num"] = $num;
